@@ -75,9 +75,13 @@ const Index = () => {
       const dataFileData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
       const newHeaders = Object.keys(templateMapping[template]);
+      const headerStyle = {
+        fill: { fgColor: { rgb: "FFFF0000" } }, // Red fill
+        font: { bold: true } // Bold font
+      };
       const newData = dataFileData.map((row, rowIndex) => {
         if (rowIndex === 0) {
-          return newHeaders;
+          return newHeaders.map(header => ({ v: header, s: headerStyle }));
         }
         const newRow = newHeaders.map(header => {
           const column = templateMapping[template][header];
