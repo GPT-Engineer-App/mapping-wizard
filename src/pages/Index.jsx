@@ -90,7 +90,7 @@ const Index = () => {
         return newRow;
       });
 
-      const newWorksheet = XLSX.utils.aoa_to_sheet(newData);
+      const newWorksheet = XLSX.utils.aoa_to_sheet(newData, { cellStyles: true });
       newWorksheet["!cols"] = newHeaders.map(() => ({ wch: 20 })); // Optional: Set column width
 
       const newWorkbook = XLSX.utils.book_new();
