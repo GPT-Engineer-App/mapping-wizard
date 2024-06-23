@@ -91,6 +91,8 @@ const Index = () => {
       });
 
       const newWorksheet = XLSX.utils.aoa_to_sheet(newData);
+      newWorksheet["!cols"] = newHeaders.map(() => ({ wch: 20 })); // Optional: Set column width
+
       const newWorkbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Processed Data");
 
