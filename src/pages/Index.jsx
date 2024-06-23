@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, VStack, Text, Input, Button, useToast, Select } from "@chakra-ui/react";
+import { Container, VStack, Text, Input, Button, useToast, Select, Heading } from "@chakra-ui/react";
 import * as XLSX from "xlsx";
 
 const Index = () => {
@@ -98,7 +98,7 @@ const Index = () => {
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <VStack spacing={4}>
-        <Text fontSize="2xl">Select Template</Text>
+        <Heading as="h1" size="xl" color="red.500" fontWeight="bold">Select Template</Heading>
         <Select placeholder="Select template" onChange={(e) => setTemplate(e.target.value)}>
           <option value="Target.com">Target.com</option>
         </Select>
