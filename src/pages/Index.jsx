@@ -75,22 +75,24 @@ const Index = () => {
       const dataFileData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
       const newHeaders = Object.keys(templateMapping[template]);
-      const newData = dataFileData.map(row => {
-        const newRow = {};
-        newHeaders.forEach((header, index) => {
+      const newData = dataFileData.map((row, rowIndex) => {
+        if (rowIndex === 0) {
+          return newHeaders;
+        }
+        const newRow = newHeaders.map(header => {
           const column = templateMapping[template][header];
-          newRow[header] = row[dataFileData[0].indexOf(column)] || (header === "Import Description" ? "Imported" : "");
+          return row[dataFileData[0].indexOf(column)] || (header === "Import Description" ? "Imported" : "");
         });
         return newRow;
       });
 
-      const newWorksheet = XLSX.utils.json_to_sheet(newData);
+      const newWorksheet = XLSX.utils.aoa_to_sheet(newData);
       const newWorkbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Processed Data");
 
       XLSX.writeFile(newWorkbook, "processed_data.xlsx");
     };
-    reader.readAsArrayBuffer(mappingFile);
+    reader.readAsArrayBuffer(dataFile);
   };
 
   return (
