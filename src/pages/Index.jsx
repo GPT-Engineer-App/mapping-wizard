@@ -76,8 +76,8 @@ const Index = () => {
 
       const newHeaders = Object.keys(templateMapping[template]);
       const headerStyle = {
-        fill: { fgColor: { rgb: "FFFF0000" } }, // Red fill
-        font: { bold: true } // Bold font
+        fill: { fgColor: { rgb: "FFFF0000" } },
+        font: { bold: true }
       };
       const newData = dataFileData.map((row, rowIndex) => {
         if (rowIndex === 0) {
@@ -91,7 +91,7 @@ const Index = () => {
       });
 
       const newWorksheet = XLSX.utils.aoa_to_sheet(newData, { cellStyles: true });
-      newWorksheet["!cols"] = newHeaders.map(() => ({ wch: 20 })); // Optional: Set column width
+      newWorksheet["!cols"] = newHeaders.map(() => ({ wch: 20 }));
 
       const newWorkbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Processed Data");
